@@ -1,0 +1,30 @@
+import java.io.IOException;
+import java.util.LinkedList;
+
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello, World!");
+		LinkedList a = new LinkedList();\
+		while(1){
+		   System.out.println("Give me a number or 'q' to quit and sort");
+		   int off = 0;
+		   int val = 0;
+		   try {
+			   val = System.in.read(null, off, 1);
+		   } catch (IOException e) {
+			// TODO Auto-generated catch block
+			   e.printStackTrace();
+		   }
+		   if (val == 'q') {
+				break;
+				
+		   }
+   		   else{
+			   	a.add(val);		
+		   }
+		}
+	}
+
+}

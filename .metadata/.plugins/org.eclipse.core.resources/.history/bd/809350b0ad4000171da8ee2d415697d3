@@ -1,0 +1,39 @@
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class HelloWorld {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("Hello, World!");
+		LinkedList a = new LinkedList();
+		Scanner sc=new Scanner(System.in);
+		String test = "q";
+		while(true){
+		   System.out.println("Give me a number or 'q' to quit and sort");
+		   int off = 0;
+		   String val = "";
+		   val = sc.next();
+		   if(val.toString().equals("q")) {
+				break;				
+		   }
+   		   else{
+			   	a.add(val);		
+		   }
+		}
+		for(int i =0;i<a.size();i++){
+			for(int j =0;j<a.size();j++){
+				if( Integer.parseInt((String) a.get(i)) > Integer.parseInt((String) a.get(j))){
+					int temp = Integer.parseInt((String) a.get(i));
+				    a.set(i, a.get(j));
+				    a.set(j, String.valueOf(temp));
+				}
+			}
+		}
+		for (int i = 0; i< a.size();i++){
+			System.out.println(a.get(i).toString());
+		}
+	}
+
+}
