@@ -1,0 +1,9 @@
+
+public abstract class Receipt {
+	
+	public String printReceipt(String name, int actNum, String type, float amount, float total, int day, int month,
+			int year) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

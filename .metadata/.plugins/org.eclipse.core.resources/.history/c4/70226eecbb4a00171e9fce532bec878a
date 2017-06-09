@@ -1,0 +1,7 @@
+
+public class Account {
+//account number, user name, balance,PIN
+	private int account_num, PIN;
+	private String user_name;
+	private double balance;
+}

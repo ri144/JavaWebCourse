@@ -1,0 +1,25 @@
+import java.sql.Connection;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		Person p = new Person();
+		System.out.printf("Please input your name.\n");
+		String first, mid, last;
+		first = s.next();
+		mid = s.next();
+		last = s.next();
+		p.setName(first, mid, last);
+		
+		
+		
+		
+		
+	}
+}

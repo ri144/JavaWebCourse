@@ -1,0 +1,44 @@
+import java.text.NumberFormat;
+import java.util.Random;
+
+public class NumberUtility<T> {
+
+	public String toPercent(T input){
+		NumberFormat percent = NumberFormat.getPercentInstance();
+		return percent.format(input);
+	}
+	
+	public String toCurrency(T input){
+		NumberFormat currency = NumberFormat.getCurrencyInstance();
+		return currency.format(input);
+	}
+	
+	public String setDecimals(T input, int digits){
+		NumberFormat number = NumberFormat.getNumberInstance();
+		number.setMaximumFractionDigits(digits);
+		return number.format(input);
+	}
+	
+	public double randBetween(T a, T b){
+		Random r = new Random();
+		
+		if((double) b >= (double) a){
+			double test = r.nextDouble() * (double) b;
+			if (test >= (double) a){
+				return test;
+			}
+			else{
+				return randBetween(a, b);
+			}
+		}
+		else{
+			double test = r.nextDouble() * (double) a;
+			if (test >= (double) b){
+				return test;
+			}
+			else{
+				return randBetween(a, b);
+			}
+		}
+	}
+}

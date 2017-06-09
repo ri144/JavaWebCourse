@@ -1,0 +1,26 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Main {
+	public static void main( String[] args )
+	{
+		Scanner s = new Scanner(System.in);
+		System.out.println("How many clients will you be working with today?");
+		int bounds = s.nextInt();
+		LocalDate now = LocalDate.now();
+		System.out.println(now.getMonth());
+		int[] ages;
+		for(int i =0; i<bounds;i++){
+			System.out.println("Please input the birth day");
+			int day = s.nextInt();
+			System.out.println("Please input the birth month (as an integer)");
+			int mon = s.nextInt();
+			System.out.println("Please input the birth year");
+			int year = s.nextInt();
+			age = now.getYear() - year;
+			//if(Integer.valueOf(now.getMonth()) < mon){
+				
+			//}
+		}
+	}
+}

@@ -1,0 +1,114 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Skills {
+
+	private Connection con = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	private int myskid;
+	
+	public void setSkills(String skill, String proficiency, int id) {
+		// TODO Auto-generated method stub
+		String myString = "insert into Skills (skill, proficiency, personid) Values ('" + skill + 
+				"', '" + proficiency + "', '" + id + "');";
+		getskid();
+		doSql(myString);
+	}
+	private void doSql(String sqlstatement){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlstatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public String getSkill(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("skill", id, i);
+	}
+	public String getProf(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("proficiency", id, i);
+	}
+	
+	private String select(String item, int id, int eduid){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			String input = "select " + item + " from Skills p where p.skid = " + String.valueOf(eduid + myskid) + " and p.personid = " + String.valueOf(id) + ";";
+			//System.out.println(input);
+			rs = stmt.executeQuery(input);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				return rs.getString(item);
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				return "";
+			}
+		}
+		return "";
+	}
+	
+	private void getskid() {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			String input = "select max(skid) from Skills;";
+			rs = stmt.executeQuery(input);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				this.myskid = rs.getInt(1);
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+}

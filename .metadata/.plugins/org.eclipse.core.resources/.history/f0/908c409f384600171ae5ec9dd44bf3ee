@@ -1,0 +1,68 @@
+
+public class Car extends Vehicle{
+	private String carType;
+	private String carColor;
+	private int carSpeed;
+	public Car(){
+		super();
+		carType = "Porsche";
+		carColor = "red";
+		carSpeed = 0;
+	}
+	public Car(String inputType, String inputColor, int inSpeed){
+		super();
+		carType = inputType;
+		carColor = inputColor;
+		carSpeed = inSpeed;
+	}
+	public void accelerate(){
+		System.out.printf("The %s %s is accelerating",carColor, carType);
+	}
+	public void start(){
+		System.out.printf("The %s %s is starting",carColor, carType);
+	}
+	public void setSpeed(int speed){
+		carSpeed = speed;
+		System.out.printf("The %s %s is going %d mph",carColor, carType, speed);
+	}
+	public void stop(){
+		carSpeed = 0;
+		System.out.printf("The %s %s is stopped",carColor, carType);
+	}
+	public void setType(String intype){
+		carType = intype;
+	}
+	public String getType(){
+		return carType;
+	}
+	public void setColor(String incolor){
+		carColor = incolor;
+	}
+	public String getColor(){
+		return carColor;
+	}
+	public int getSpeed(){
+		return carSpeed;
+	}
+	public void emissionCheck(){
+		int temp = carSpeed;
+		carSpeed = 0;
+		System.out.printf("The %s %s is stopping to have its emissions checked.",carColor, carType);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.printf("The %s %s passed its emission test",carColor, carType);
+		carSpeed = temp;
+	}
+	public void race(Car otherCar){
+		if(carSpeed > otherCar.carSpeed){
+			System.out.printf("The %s %s just passed the %s %s",carColor, carType, otherCar.carColor, otherCar.carType);
+		}
+		else{
+			System.out.printf("The %s %s just passed the %s %s", otherCar.carColor, otherCar.carType, carColor, carType);
+		}
+	}
+}

@@ -1,0 +1,65 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String []args){
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter the month: ");
+		int mon = s.nextInt();
+		System.out.println("Enter the year: ");
+		int year = s.nextInt();
+		String yearString;
+		mon -= 1;
+		if (mon == 0){
+			yearString = "January";
+		}
+		else if (mon == 1){
+			yearString = "February";
+		}
+		else if (mon == 2){
+			yearString = "March";
+		}
+		else if (mon == 3){
+			yearString = "April";
+		}
+		else if (mon == 4){
+			yearString = "May";
+		}
+		else if (mon == 5){
+			yearString = "June";
+		}
+		else if (mon == 6){
+			yearString = "July";
+		}
+		else if (mon == 7){
+			yearString = "August";
+		}
+		else if (mon == 8){
+			yearString = "September";
+		}
+		else if (mon == 9){
+			yearString = "October";
+		}
+		else if (mon == 10){
+			yearString = "November";
+		}
+		else{
+			yearString = "December";
+		}
+		
+		Calendar cal = new GregorianCalendar(2017,0,1);
+		cal.set(Calendar.MONTH, mon);
+		cal.set(Calendar.YEAR, year);
+		System.out.println("\t"+ yearString + " " + year);
+		System.out.println("Sun Mon Tue Wed Thu Fri Sat");
+		System.out.println(cal.get(Calendar.DAY_OF_WEEK));
+		int dayCounter = 0;
+		System.out.printf(" ");
+		for (int i = 1;i<cal.get(Calendar.DAY_OF_WEEK);i++){
+			System.out.printf("   ");
+		}
+		System.out.printf("%d", cal.get(Calendar.DAY_OF_MONTH));
+		//for int i = 0; i < cal.get(Calendar.DAY_OF_MONTH;i++)
+	}
+}

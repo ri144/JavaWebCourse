@@ -1,0 +1,18 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		double len, wid, rain;
+		System.out.println("What is the length of your roof? (Feet)");
+		len = scan.nextDouble()*12;
+		System.out.println("What is the width of your roof? (Feet)");
+		wid = scan.nextDouble()*12;
+		System.out.println("What is the amount of rainfall? (Inches)");
+		rain = scan.nextDouble()*len*wid/231;
+		System.out.println(rain + " gallons run off the roof");
+		
+		
+	}
+}

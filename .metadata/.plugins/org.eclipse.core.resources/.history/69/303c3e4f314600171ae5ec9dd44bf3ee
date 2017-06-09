@@ -1,0 +1,10 @@
+public abstract class Animal 
+{
+	
+	public String sleep() {
+		return "An animal sleeps...";
+	}
+	public String eat() {
+		return "An animal eats...";
+	}
+}

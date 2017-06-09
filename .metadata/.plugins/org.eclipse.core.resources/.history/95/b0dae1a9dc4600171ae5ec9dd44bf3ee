@@ -1,0 +1,37 @@
+import java.util.InputMismatchException;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		 
+		  int a, b = null, result = 0;
+		 
+		  Scanner input = new Scanner(System.in);
+		  System.out.println("Input two integers");
+		 
+		  a = input.nextInt();
+		  try{
+			  b = input.nextInt();
+		  }
+		  catch(InputMismatchException e){
+			  System.out.println("Error: did not input integer\n");
+			  result = 0;
+		  }
+		  try{
+		  	result = a / b;
+		  }
+		  catch(NullPointerException e){
+			  System.out.println("Error: one of the inputs has no value\n");
+		  }
+		  catch(ArithmeticException e){
+		  	System.out.println("Error: invalid divide by 0\n");
+		    result  = 0;
+		  }
+		  finally {
+			    System.out.println("finally block will execute.");
+		  }
+		  System.out.println("Result = " + result);
+		  
+	}
+}

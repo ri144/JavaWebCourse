@@ -1,0 +1,28 @@
+
+public class ATM implements iATM{
+	Account myAccount = new Account(); 
+	//make a deposit, make a withdraw or check the balance.The ATM class must also display the results of any transaction or inquiry.
+	public ATM(){
+		System.out.println("What is your account number?");
+		System.out.println("What is your name?");
+		System.out.println("What is your initial balance?");
+		System.out.println("What is your PIN?");
+	}
+	
+	public void deposit(float amount){
+		myAccount.update_balance(amount);
+		System.out.printf("You deposited %2.2f and now have $%2.2f in your account's balance\n",amount, myAccount.getBalance());
+	}
+	public void withdraw(float amount){
+		if(myAccount.getBalance() > amount){
+			myAccount.update_balance(-amount);
+			System.out.printf("You withdrew %2.2f and currently have $%2.2f in your account's balance\n",amount, myAccount.getBalance());
+		}
+		else{
+			System.out.println("You do not have enough money in your account to make that large of a withdrawal.");
+		}
+	}
+	public void checkBalance(){
+		System.out.printf("You currently have $%2.2f\n",myAccount.getBalance());
+	}
+}

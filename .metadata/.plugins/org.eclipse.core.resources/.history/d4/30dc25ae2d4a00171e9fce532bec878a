@@ -1,0 +1,8 @@
+
+public class FormatTest {
+	public static void main(String[] args) {
+		NumberUtility n = new NumberUtility();
+		int x = 1;
+		n.max(x, 7.8);
+	}
+}

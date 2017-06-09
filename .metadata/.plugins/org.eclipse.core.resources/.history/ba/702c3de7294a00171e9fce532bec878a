@@ -1,0 +1,53 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.io.File;
+import java.io.IOException;
+import java.awt.*;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame; 
+
+public class Sandbox extends Canvas{
+
+	      
+	public void paint(Graphics g) {  
+	       /* g.drawString("Hello",40,40);  
+	        setBackground(Color.WHITE);  
+	        g.fillRect(130, 30,100, 80);  
+	        g.drawOval(30,130,50, 60);  
+	        setForeground(Color.RED);  
+	        g.fillOval(130,130,50, 60);  
+	        g.drawArc(30, 200, 40,50,90,60);  
+	        g.fillArc(30, 130, 40,50,180,40);*/
+	        Image img = null;
+			try {
+				Orc oz = new Orc(1,1);
+				img = ImageIO.read(oz.getPicture());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        g.drawImage(img, 10,10,50,50,Color.WHITE, null);
+	   
+	          
+	}
+	
+	public static void main(String[] args) { 
+		int x =7;
+		double y = (double) x;
+        Sandbox m=new Sandbox();  
+        JFrame f=new JFrame();  
+        f.add(m);  
+        f.setSize(100,100);  
+        f.setVisible(true);
+        try {
+			f.wait(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        f.setVisible(false);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }  
+
+}

@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(System.in);
+		System.out.println("Please input your name");
+		String name = s.nextLine();
+		System.out.println("Please input your email address");
+		String email = s.nextLine();
+		String[] degree = new String[10];
+		String[] school = new String[10];
+		String[] year = new String[10];
+		String[][] edu = {degree, school, year};
+		System.out.println("Please enter your first educational experience ('degree','school','year')");
+		degree[0] = s.next();
+		school[0] = s.next();
+		year[0] = s.next();
+		do{
+			
+		}while(false);
+	}
+
+}

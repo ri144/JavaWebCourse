@@ -1,0 +1,8 @@
+
+public abstract class Monster {
+	private int hp;
+	public abstract int move();	
+	public abstract int attack();
+}
+	
+

@@ -1,0 +1,18 @@
+import java.util.Random;
+
+public class Orc extends Monster{
+
+	@Override
+	public int move() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int attack() {
+		// TODO Auto-generated method stub
+		Random r = new Random();
+		return r.nextInt(10);
+	}
+	
+}

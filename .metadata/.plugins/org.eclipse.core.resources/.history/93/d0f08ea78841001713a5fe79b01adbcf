@@ -1,0 +1,23 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		double side1, side2, side3;
+		System.out.println("Enter length for side 1");
+		side1 = scan.nextDouble();
+		System.out.println("Enter length for side 2");
+		side2 = scan.nextDouble();
+		System.out.println("Enter length for side 3");
+		side3 = scan.nextDouble();
+		if (side1 == side2 && side2 == side3)
+			System.out.println("The triangle is equilateral");
+		else if(Math.pow(side1, 2) == Math.pow(side2,2) + Math.pow(side3, 2) || Math.pow(side2, 2) == Math.pow(side1,2) + Math.pow(side3, 2) || Math.pow(side3, 2) == Math.pow(side2,2) + Math.pow(side1, 2))
+			System.out.println("The triangle is a right triangle");
+		else
+			System.out.println("The triangle is not special");
+		scan.close();
+		
+	}
+}

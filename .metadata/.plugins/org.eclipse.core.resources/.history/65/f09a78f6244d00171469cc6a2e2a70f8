@@ -1,0 +1,24 @@
+
+public class Education {
+
+	public String getDegree() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	public String getMajor() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	public String getSchool() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	public String getYear() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+}

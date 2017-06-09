@@ -1,0 +1,6 @@
+
+public abstract class Receipt {
+	public String printReceipt(String name, int actNum, String type, float amount, float total){
+		return "";
+	}
+}

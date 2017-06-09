@@ -1,0 +1,87 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s = new Scanner(System.in);
+		System.out.println("Please input your name");
+		String name = s.nextLine();
+		System.out.println("Please input your email address");
+		String email = s.nextLine();
+		String[] degree = new String[10];
+		String[] major = new String[10];
+		String[] school = new String[10];
+		String[] year = new String[10];
+		String[][] edu = {degree, major, school, year};
+		System.out.println("Please enter your first educational experience ('degree', 'major', 'school','year')");
+		degree[0] = s.next();
+		major[0] = s.next();
+		school[0] = s.next();
+		year[0] = s.next();
+		int count = 1;
+		do{
+			System.out.println("Do you have another educational experience to input? ('Y/N')");
+			if (s.next().equals("N")){
+				break;
+			}
+			System.out.println("Please enter your next educational experience ('degree','major', 'school','year')");
+			degree[count] = s.next();
+			major[count] = s.next();
+			school[count] = s.next();
+			year[count] = s.next();
+			count++;
+		}while(count < 10);
+		
+		String[] title = new String[10];
+		String[] company = new String[10];
+		String[] start = new String[10];
+		String[] end = new String[10];
+		String[] duty1 = new String[10];
+		String[] duty2 = new String[10];
+		String[][] work = {title, company, start, end, duty1, duty2};
+		int workCount = 0;
+		do{
+			System.out.println("Do you have a work experience to input? ('Y/N')");
+			if (s.next().equals("N")){
+				break;
+			}
+			System.out.println("Please enter your next work experience ('title', 'company', 'start', 'end', 'duty1', 'duty2')");
+			title[workCount] = s.next();
+			company[workCount] = s.next();
+			start[workCount] = s.next();
+			end[workCount] = s.next();
+			duty1[workCount] = s.next();
+			duty2[workCount] = s.next();
+			workCount++;
+		}while(workCount < 10);
+		
+		String[] skill = new String[10];
+		String[] proficiency = new String[10];
+		String[][] skills = {skill, proficiency};
+		System.out.println("Please enter your first skill");
+		skill[0] = s.next();
+		System.out.println("How proficient are you at this skill? ('highly skilled', 'proficient', 'familiar', 'beginner')");
+		proficiency[0] = s.next();
+		int skillCount = 1;
+		do{
+			System.out.println("Do you have another skill to input? ('Y/N')");
+			if (s.next().equals("N")){
+				break;
+			}
+			System.out.println("Please enter your next skill");
+			skill[0] = s.next();
+			System.out.println("How proficient are you at this skill? ('highly skilled', 'proficient', 'familiar', 'beginner')");
+			proficiency[0] = s.next();
+			skillCount++;
+		}while(skillCount < 20);
+		System.out.println("=============================================================");
+		System.out.println(name);
+		System.out.println(email);
+		System.out.println("\nEducation");
+		for(int i = 0; i<count;i++){
+			System.out.printf("%s in %s,\n%s, %s\n\n", degree[i], major[i], school[i], year[i]);
+		}
+	}
+
+}

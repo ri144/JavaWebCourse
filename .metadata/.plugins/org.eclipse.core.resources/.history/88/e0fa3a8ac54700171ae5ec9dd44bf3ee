@@ -1,0 +1,13 @@
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+public class Sandbox {
+
+	public static void main(String[] args) {
+		Graphics g = null;
+		Graphics2D g2 = (Graphics2D) g;
+		// TODO Auto-generated method stub
+		g2.drawLine(1,1,2,2);
+	}
+
+}

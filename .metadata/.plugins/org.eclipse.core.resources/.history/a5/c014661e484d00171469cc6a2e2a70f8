@@ -1,0 +1,38 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Experience {
+
+	private Connection con = null;
+	private Statement stmt = null;
+	
+	public void setWork(String position, String company, String startmonth, String startyear, String endmonth,
+			String endyear, String duty1, String duty2, int id) {
+		// TODO Auto-generated method stub
+		String myString = "insert into Exper (position, company, startmonth, startyear, endmonth, endyear, duty1, duty2, personid)"
+				+ " Values ('" + position + "', '" + company + "', '" + startmonth + "', '" + startyear + "', '"
+				+ endmonth + "', '" + endyear + "', '" + duty1 + "', '" +duty2 + "', '" + id + "');";
+		doSql(myString);
+	}
+
+	private void doSql(String sqlstatement){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlstatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+}

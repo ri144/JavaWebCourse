@@ -1,0 +1,44 @@
+
+public class TransactionSummary extends Receipt{
+/*	+--------------------------------------+
+	|      Java Bank ATM Receipt           |
+	|      Wednesday, December 2, 2015     |
+	|      ATM Location # 123              |
+	|                                      |
+	|                                      |
+	|      Account Number:      1234567    |
+	|      Customer:     John Q. Public    |
+	|      Transaction Type:    Deposit    |
+	|      Transaction Amount:  $500.00    |
+	|      Account Balance:   $1,500.00    |
+	|                                      |
+	|      Thank you for banking with us   |
+	|            Have a coffee day         |
+	|                                      |
+	+--------------------------------------+*/
+	@Override
+	public String printReceipt(String name, int actNum, String type, float amount, float total, int day, int month, int year){
+		String complete;
+		DateUtility.setCalendar(day, month, year);
+		complete = "+--------------------------------------+\n"
+				+ "|      Java Bank ATM Receipt           |\n"
+				+ "|      " + DateUtility.getDayOfWeek() + ", " + DateUtility.getMonth(month) + " " + String.valueOf(day) + ", " + String.valueOf(year) + "\n"
+				+ "|      ATM Location # 123              |\n"
+				+ "|                                      |\n"
+				+ "|                                      |\n"
+				+ "|      Account Number:      " + String.valueOf(actNum) + "    |\n"
+				+ "|      Customer:     " + name + "    |\n"
+				+ "|      Transaction Type:    " + type + "    |\n"
+				+ "|      Transaction Amount:  $" + NumberUtility.toCurrency(amount) + "    |\n"
+				+ "|      Account Balance:   $" + NumberUtility.toCurrency(total) + "    |\n"
+				+ "|                                      |\n"
+				+ "|      Thank you for banking with us   |\n"
+				+ "|            Have a coffee day         |\n"
+				+ "|                                      |\n"
+				+ "+--------------------------------------+\n";	
+				
+	
+		return complete;		
+	}
+
+}

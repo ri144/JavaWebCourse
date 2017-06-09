@@ -1,0 +1,24 @@
+import java.io.File;
+import java.util.Random;
+
+public class Orc extends Monster{
+
+	@Override
+	public int move() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int attack() {
+		// TODO Auto-generated method stub
+		Random r = new Random();
+		return r.nextInt(10);
+	}
+	@Override
+	public File getPicture() {
+		// TODO Auto-generated method stub
+		return new File("/home/student/Documents/workspace/Absurdity/src/pics/orc.jpg");
+	}
+	
+}

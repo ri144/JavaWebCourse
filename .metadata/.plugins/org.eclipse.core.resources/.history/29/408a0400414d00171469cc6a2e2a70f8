@@ -1,0 +1,90 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Education {
+
+	private Connection con = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	
+	private String select(String item, int id, int eduid){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select " + item + " from Edu p where p.eduid = '" + String.valueOf(eduid) + "and p.personid = '" + String.valueOf(id) + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				return rs.getString(item);
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "";
+	}
+	
+	public String getDegree(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("degreelevel",id, i);
+	}
+
+	public String getMajor(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("major",id, i);
+	}
+
+	public String getSchool(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("school",id, i);
+	}
+
+	public String getYear(int id, int i) {
+		// TODO Auto-generated method stub
+		return select("year",id, i);
+	}
+
+	public void setEdu(String deg, String maj, String sch, String year, int id) {
+		// TODO Auto-generated method stub
+		String myString = "insert into Edu (degreelevel, major, school, year, personid) Values ('" + deg + 
+				"', '" + maj + "', '" + sch + "', '" + year + "', '" + id + "');";
+		doSql(myString);
+	}
+	
+	private void doSql(String sqlstatement){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlstatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

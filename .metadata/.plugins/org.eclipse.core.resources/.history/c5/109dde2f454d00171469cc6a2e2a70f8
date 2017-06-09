@@ -1,0 +1,161 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Person {
+	private Education ed = new Education();
+	private Skills sk = new Skills();
+	private Experience exp = new Experience();
+	private Connection con = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	private int id;
+	public Person(){
+		
+	}
+	
+	private String select(String item){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select " + item + " from Person p where p.personid = '" + String.valueOf(id) + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				return rs.getString(item);
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "";
+	}
+	
+	private void doSql(String sqlstatement){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlstatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private int readSql(String email){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select personid from Person p where p.email = '" + email + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				rs.next();
+				//System.out.printf("%d\n",rs.getInt("personid"));
+				return rs.getInt("personid");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return 0;
+	}
+	
+	public void finalize(){
+		try {
+			rs.close();
+			stmt.close();
+			con.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	public String getEdu(){
+		String complete = "";
+		for (int i = 1; i < 10; i++){
+			if (!ed.getDegree(id, i).equals("")){
+				complete += ed.getDegree(id, i) + " in " + ed.getMajor(id, i) + "\n" + ed.getSchool(id, i)
+				+ ", " + ed.getYear(id, i) + "\n\n";
+				System.out.println("We got a runner\n");
+			}
+		}
+		return complete;
+	}
+	
+	public void setName(String first, String mid, String last) {
+		// TODO Auto-generated method stub
+		String sql = "insert into Person (firstname, midinit, lastname) Values ('" + first + "' , '" + mid + "' , '"+ last +"');"; 
+		//System.out.printf("%s\n", sql);
+		doSql(sql);
+	}
+
+	public void setemail(String nextLine, String first, String last) {
+		// TODO Auto-generated method stub
+		String sql = "update Person set email = '" + nextLine + "' where firstname = '" + first+ "' and lastname = '" + 
+		last + "';"; 
+		//System.out.printf("%s\n", sql);
+		doSql(sql);
+		id = readSql(nextLine);
+		//System.out.println(id);
+	}
+
+	public void setEdu(String deg, String maj, String sch, String year) {
+		// TODO Auto-generated method stub
+		//System.out.println(deg+maj+sch+year+String.valueOf(id));
+		ed.setEdu(deg, maj, sch, year, id);
+	}
+
+	public void setWork(String position,String company, String startmonth, String startyear, String endmonth, String endyear, String duty1, String duty2) {
+		// TODO Auto-generated method stub
+		exp.setWork(position, company, startmonth, startyear, endmonth, endyear, duty1, duty2, id);
+	}
+
+	public void setSkill(String skill, String proficiency) {
+		// TODO Auto-generated method stub
+		sk.setSkills(skill, proficiency, id);
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return select("firstname") + " " + select("midinit") + " " + select("lastname");
+	}
+
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return select("email");
+	}
+}

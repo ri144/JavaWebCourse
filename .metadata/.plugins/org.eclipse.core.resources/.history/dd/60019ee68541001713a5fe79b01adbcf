@@ -1,0 +1,23 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);
+		double len, wid, rain;
+		len = askVal("length",scan);
+		wid = askVal("width",scan);
+		System.out.println("What is the amount of rainfall? (Inches)");
+		rain = scan.nextDouble()*len*wid/231;
+		System.out.println(rain + " gallons run off the roof");
+		scan.close();
+		
+	}
+
+	private static double askVal(String string, Scanner scan) {
+		// TODO Auto-generated method stub
+		System.out.println("What is the " + string + " of your roof? (Feet)");
+		double val = scan.nextDouble()*12;
+		return val;
+	}
+}

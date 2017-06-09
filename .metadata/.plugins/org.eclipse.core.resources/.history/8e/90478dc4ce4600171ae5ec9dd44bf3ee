@@ -1,0 +1,18 @@
+
+public class Person {
+//composition has-a relationship
+	private Job job;
+	private Education edu;
+	public Person(){
+    	this.job=new Job();
+    	job.setSalary(1000L);
+    	this.edu = new Education();
+	}
+	public long getSalary() {
+    	return job.getSalary();
+	}
+	@Override
+	public String toString(){
+		return job.toString() + " " + edu.toString();
+	}
+}

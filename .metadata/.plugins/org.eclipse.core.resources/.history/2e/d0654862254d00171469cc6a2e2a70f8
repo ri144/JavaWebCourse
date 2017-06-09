@@ -1,0 +1,109 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Person {
+	private Education ed;
+	private Skills sk;
+	private Experience exp;
+	private Connection con = null;
+	private Statement stmt = null;
+	private ResultSet rs = null;
+	private int id;
+	public Person(){
+		
+	}
+	
+	private void doSql(String sqlstatement){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(sqlstatement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private int readSql(String email){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("select personid from Person p where p.email = '" + email + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			return rs.getInt("email");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void finalize(){
+		try {
+			rs.close();
+			stmt.close();
+			con.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+	public String getEdu(String param){
+		if(param.equals("degreelevel")){
+			return ed.getDegree();
+		}
+		else if (param.equals("major")){
+			return ed.getMajor();
+		}
+		else if (param.equals("school")){
+			return ed.getSchool();
+		}
+		else if (param.equals("year")){
+			return ed.getYear();
+		}
+		else{
+			return "Value for input paramter not found";
+		}
+	}
+	
+	public void setName(String first, String mid, String last) {
+		// TODO Auto-generated method stub
+		String sql = "insert into Person (firstname, midinit, lastname) Values ('" + first + "' , '" + mid + "' , '"+ last +"');"; 
+		System.out.printf("%s\n", sql);
+		doSql(sql);
+	}
+
+	public void setemail(String nextLine, String first, String last) {
+		// TODO Auto-generated method stub
+		String sql = "update Person set email = '" + nextLine + "' where firstname = '" + first+ "' and lastname = '" + 
+		last + "';"; 
+		System.out.printf("%s\n", sql);
+		doSql(sql);
+		id = readSql(nextLine);
+		
+	}
+
+	public void setEdu(String deg, String maj, String sch, String year) {
+		// TODO Auto-generated method stub
+		ed.setEdu(deg, maj, sch, year, id);
+	}
+}
