@@ -1,0 +1,153 @@
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Scanner;
+
+public class Customer {
+	private static Connection con = null;
+	private static Statement stmt = null;
+	private static ResultSet rs = null;
+	static String  id, title, fullName, street, city, state, zip, email, pos, comp;
+	/*"Customer Number: 9
+Mr. Robert Dupree
+4101 Pickens Way
+Longview, TX 75601
+RobertODupree@einrot.com
+Mapping technician at Irving's Sporting Goods"*/
+	
+	public static String fetchCustomer(String s, Scanner sc){
+		select(s, sc);
+		String complete = title + " " + fullName + "\n" + street + "\n" + city + ", " + state + " " + zip + "\n"
+				+ email + "\n" + pos + " at " + comp;
+		return complete;
+	}
+	
+	private static void select(String item, Scanner s){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select * from customers cu where cu.lastName = '" + String.valueOf(item) + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			boolean catches = false;
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				try{
+					title = rs.getString("Title");
+				}
+				catch(SQLException e){
+					catches = true;
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+					System.out.println(sw);
+					if (sw.toString().equals("java.sql.SQLException: Illegal operation on empty result set."
+							+ "at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:964)")){
+						System.out.printf("Customer does not exist. Would you like to add a customer "
+								+ "with the specified last name? ('Y'/'N')\n");
+						if(s.nextLine() == "Y"){
+							addCust(item, s);
+						}
+					}
+					
+				}
+				if (!catches){
+					fullName =  rs.getString("FullName");
+					street = rs.getString("StreetAddress");
+					city = rs.getString("City");
+					state = rs.getString("State");
+					zip = String.valueOf(rs.getInt("ZipCode"));
+					email = rs.getString("EmailAddress");
+					pos =  rs.getString("Position");
+					comp = rs.getString("Company");
+				}
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	private static void addCust(String item, Scanner s) {
+		// TODO Auto-generated method stub
+		System.out.printf("What is the customer's first name?\n");
+		fullName = s.nextLine();
+		System.out.printf("What is the customer's title?\n");
+		title = s.nextLine();
+		System.out.printf("What is the customer's street address?\n");
+		street = s.nextLine();
+		System.out.printf("What is the customer's home city?\n");
+		city = s.nextLine();
+		System.out.printf("What is the customer's home state?\n");
+		state = s.nextLine();
+		System.out.printf("What is the customer's zip code?\n");
+		zip = s.nextLine();
+		System.out.printf("What is the customer's email address?\n");
+		email = s.nextLine();
+		System.out.printf("What is the customer's position?\n");
+		pos = s.nextLine();
+		System.out.printf("Who is the customer's employer?\n");
+		comp = s.nextLine();
+		String insert = "insert into customers (FullName, Title, FirstName, LastName, StreetAddress, City, State,"
+				+ " ZipCode, EmailAddress, Position, Company) Values ('" + fullName + " " + item + "', '" + title + "', '" + fullName + "', '" + item + "',"
+				+ "'" + street + "', '" + city + "', '" + state + "', '" + zip + "', '" + email + "', '" + pos + "', '" + comp + "');";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			stmt.executeUpdate(insert);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+
+	public static void editCustomer(String cust, String string, String value) {
+		// TODO Auto-generated method stub
+			String comp = "update customers set " + string + " = '" + value + "' where LastName = '" + cust + "';";
+			//System.out.printf("%s\n", comp);
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+	            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+	                                + "user=root&password=password");
+				stmt = con.createStatement();
+				stmt.executeUpdate(comp);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NullPointerException e){
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+	
+}

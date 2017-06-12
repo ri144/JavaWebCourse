@@ -1,0 +1,9 @@
+
+public class Customer {
+	
+	
+	public static void fetchCustomer(String s){
+		
+		
+	}
+}

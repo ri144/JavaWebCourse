@@ -1,0 +1,99 @@
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Customer {
+	private static Connection con = null;
+	private static Statement stmt = null;
+	private static ResultSet rs = null;
+	static String  title, fullName, street, city, state, zip, email, pos, comp;
+	/*"Customer Number: 9
+Mr. Robert Dupree
+4101 Pickens Way
+Longview, TX 75601
+RobertODupree@einrot.com
+Mapping technician at Irving's Sporting Goods"*/
+	
+	public static String fetchCustomer(String s){
+		select(s);
+		String complete = title + " " + fullName + "\n" + street + "\n" + city + ", " + state + " " + zip + "\n"
+				+ email + "\n" + pos + " at " + comp;
+		return complete;
+	}
+	
+	private static void select(String item){
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+                                + "user=root&password=password");
+			stmt = con.createStatement();
+			rs = stmt.executeQuery("select * from customers cu where cu.lastName = '" + String.valueOf(item) + "';");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e){
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (rs!= null){
+			try {
+				//String complete = "";
+				//while(rs.next()){
+				rs.next();
+				try{
+					title = rs.getString("Title");
+				}
+				catch(SQLException e){
+
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+					System.out.print(sw.toString());
+				}
+				fullName =  rs.getString("FullName");
+				street = rs.getString("StreetAddress");
+				city = rs.getString("City");
+				state = rs.getString("State");
+				zip = String.valueOf(rs.getInt("ZipCode"));
+				email = rs.getString("EmailAddress");
+				pos =  rs.getString("Position");
+				comp = rs.getString("Company");
+				//}
+				//return complete;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	public static void editCustomer(String cust, String string, String value) {
+		// TODO Auto-generated method stub
+			String comp = "update customers set " + string + " = '" + value + "' where LastName = '" + cust + "';";
+			//System.out.printf("%s\n", comp);
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+	            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
+	                                + "user=root&password=password");
+				stmt = con.createStatement();
+				stmt.executeUpdate(comp);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NullPointerException e){
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	}
+	
+}
