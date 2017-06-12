@@ -210,7 +210,7 @@ Mapping technician at Irving's Sporting Goods"*/
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (cu+ "\t\t\t" + s + "\t\t\t" + co);
+		return (cu+ "\t" + s + "\t" + co);
 	}
 	
 }

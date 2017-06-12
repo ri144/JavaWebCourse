@@ -182,35 +182,5 @@ Mapping technician at Irving's Sporting Goods"*/
 				System.out.printf("You cannot change that, try again later");
 			}
 	}
-
-	public static String getTotals() {
-		// TODO Auto-generated method stub
-		String co= "", s = "", cu = "";
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
-                                + "user=root&password=password");
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("select count(distinct State), count(distinct Company), count(*) from customers limit 15000;");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NullPointerException e){
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			rs.next();
-			s = rs.getString(1);
-			co = rs.getString(2);
-			cu = rs.getString(3);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return (cu+ "\t\t\t" + s + "\t\t\t" + co);
-	}
 	
 }
