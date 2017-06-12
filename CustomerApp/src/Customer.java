@@ -83,15 +83,7 @@ Mapping technician at Irving's Sporting Goods"*/
 					comp = rs.getString("Company");
 				}
 				else if(!update){
-					title = "";
-					fullName = "";
-					street = "";
-					city ="";
-					state = "";
-					zip = "";
-					email = "";
-					pos = "";
-					comp = "";
+					reset();
 				}
 				//}
 				//return complete;
@@ -101,6 +93,21 @@ Mapping technician at Irving's Sporting Goods"*/
 			}
 		}
 		
+	}
+
+	
+	
+	private static void reset() {
+		// TODO Auto-generated method stub
+		title = "";
+		fullName = "";
+		street = "";
+		city ="";
+		state = "";
+		zip = "";
+		email = "";
+		pos = "";
+		comp = "";
 	}
 
 	private static void addCust(String item, Scanner s) {
@@ -131,7 +138,13 @@ Mapping technician at Irving's Sporting Goods"*/
             con = DriverManager.getConnection("jdbc:mysql://localhost/myNewDB?autoReconnect=true&useSSL=false&"
                                 + "user=root&password=password");
 			stmt = con.createStatement();
-			stmt.executeUpdate(insert);
+			try{
+				stmt.executeUpdate(insert);
+			}
+			catch(SQLException e){
+				System.out.printf("Your input did not have an integer for the zipcode, try again later\n");
+				reset();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
