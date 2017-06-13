@@ -11,7 +11,7 @@ public class Customer {
 	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
-	static String  id, title, fullName, street, city, state, zip, email, pos, comp;
+	private static String  id, title, fullName, street, city, state, zip, email, pos, comp;
 	/*"Customer Number: 9
 Mr. Robert Dupree
 4101 Pickens Way

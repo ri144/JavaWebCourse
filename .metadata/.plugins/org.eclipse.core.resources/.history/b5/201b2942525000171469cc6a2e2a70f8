@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action = "/ServerSublet" method = "post">
+<input type = "text" style= "width:150;" name="lName" value="Please input the customer's last name?">
+<input type = "submit" value = "enter">
+
+
+</form>
+</body>
+</html>
