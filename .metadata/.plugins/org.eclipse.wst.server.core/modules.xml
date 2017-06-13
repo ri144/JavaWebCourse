@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <modules>
   <module moduleId="org.eclipse.jst.jee.server:CustomerWebProject" serverId="Pivotal tc Server Developer Edition v3.2"/>
+  <module moduleId="org.eclipse.jst.jee.server:CrabcakeWebsite" serverId="Pivotal tc Server Developer Edition v3.2"/>
 </modules>
